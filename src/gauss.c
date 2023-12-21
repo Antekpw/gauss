@@ -43,27 +43,3 @@ int eliminate(Matrix *mat, Matrix *b){
 			mat->data[i] = mat->data[maxid];
 			mat->data[maxid] = pol;
 			}
-		for(int j=i+1; j<mat->r; j++)
-		{
-		if(mat->data[i][i]==0) return 1;       
-			wsp = mat->data[j][i] / mat->data[i][i];
-		for(int k=i; k<mat->c; k++)
-		mat->data[j][k] -=wsp * mat->data[i][k]; 
-		b->data[j][0] -= wsp * b->data[i][0]; 
-		}
-		
-		}
-		
-/*	printf("PO GAUSSSSIEEEEEE");	
-		for(int i=0; i<mat->r; i++){
-		printf("\n");
-			for(int j=0; j<mat->r; j++){
-		printf("%g->",mat->data[i][j]);
-		}}
-		printf("\nmaciez b\n");
-		for(int i=0;i<b->r; i++)printf("%g\n", b->data[i][0]);
-	*/	
-	return 0;
-}
-
-
