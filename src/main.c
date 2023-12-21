@@ -17,14 +17,37 @@ int main(int argc, char ** argv) {
 	printToScreen(b);
 
 	res = eliminate(A,b);
+// res = 1 macierz osobliwa - dzielenie przez 0
+	if(res == 1)
+	{
+	fprintf(stderr,"Blad, macierz osobliwa - dzielenie przez 0\n");
+	return 1;
+	}
+
 	x = createMatrix(b->r, 1);
 	if (x != NULL) {
-		res = backsubst(x,A,b);
 
+
+/**
+ * Zwraca 0 - wsteczne podstawienie zakonczone sukcesem
+ * Zwraca 1 - bĹ‚Ä…d dzielenia przez 0 (element na diagonali = 0)
+ * Zwraca 2 - bĹ‚Ä…d nieprawidĹ‚owych rozmiarĂłw macierzy
+ */
+		res = backsubst(x,A,b);
+if(res == 1)
+{
+	fprintf(stderr,"BLAD! dzielenie przez zero\n");
+	return 1;
+}
+if(res == 2)
+{
+	fprintf(stderr,"BLAD! nieprawidlowy rozmiar macierzy\n");
+	return 1;
+}
 		printToScreen(x);
 	  freeMatrix(x);
 	} else {
-					fprintf(stderr,"Błąd! Nie mogłem utworzyć wektora wynikowego x.\n");
+					fprintf(stderr,"Blad! Nie moglem utworzyc wektora wynikowego x.\n");
 	}
 
 	freeMatrix(A);
